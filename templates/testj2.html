@@ -2,27 +2,15 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 
-<style>
-  body{ font-family: sans-serif; }
-</style>
-
-<h2 id='data-title'></h2>
-<div id='data'>
-    <pre></pre>
-</div>
-
-d3.json('data/nobel_winners.json', function(error, data){
-
-    if(error){
-        console.log(error);
-    }
-
-    d3.select('h2#data-title').text('All the Nobel-winners');
-    d3.select('div#data pre')
-      .html(JSON.stringify(data, null, 4));  
-
-});
-
-
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="script.js"></script>
+<body>
+  <h2>{{ heading }}</h2>
+  <ul>
+    {% for winner in winners %}
+    <li><a href="{{ 'http://wikipedia.com/wiki/'
+        + winner.name }}">
+      {{ winner.name }}</a>
+      {{ ', category: ' + winner.category }}
+    </li>
+    {% endfor %}
+  </ul>
+</body>
