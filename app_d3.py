@@ -26,7 +26,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return render_template('bootstrap_1.html')
 
 @app.route('/barchart')
 def barchart():
