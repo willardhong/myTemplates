@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D3 charts</title>
+    <!--link rel="stylesheet" href="../base.css"-->
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/myStyle.css') }}"/>
+</head>
+
+<body>
+<svg id="chart" class="chart"></svg>
+<script>
+  var data = JSON.parse('{{ databar | tojson | safe }}');
+</script>
+<script src="{{ url_for('static', filename='js/barchart.js') }}"></script>
+
+<!-- scatter plot -->
+
+<div id='scatter_vis'>
+</div>
+
+<script>
+  var datascat = JSON.parse('{{ datascat | tojson | safe }}');
+    //var data = [[5,3], [10,17], [15,4], [2,8]];
+</script>
+
+<script src="{{ url_for('static', filename='js/scatterchart.js') }}"></script>
+
+<div id="vis">
+</div>
+
+</body>
+</html>

@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
 
-<svg class="chart"></svg>
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<link rel="stylesheet" type="text/css"
-href="{{ url_for('static', filename='css/myStyle.css') }}"/>
 
-<script>
-
-var data = JSON.parse('{{ databar | tojson | safe }}');
 
 var chartWidth       = 300,
     barHeight        = 20,
@@ -24,6 +15,8 @@ for (var i=0; i<data.labels.length; i++) {
     zippedData.push(data.series[j].values[i]);
   }
 }
+
+
 // Color scale
 var color = d3.scale.category20();
 var chartHeight = barHeight * zippedData.length + gapBetweenGroups * data.labels.length;
@@ -31,6 +24,7 @@ var chartHeight = barHeight * zippedData.length + gapBetweenGroups * data.labels
 var x = d3.scale.linear()
     .domain([0, d3.max(zippedData)])
     .range([0, chartWidth]);
+
 
 var y = d3.scale.linear()
     .range([chartHeight + gapBetweenGroups, 0]);
@@ -42,7 +36,7 @@ var yAxis = d3.svg.axis()
     .orient("left");
 
 // Specify the chart area and dimensions
-var chart = d3.select(".chart")
+var chart = d3.select("#chart")
     .attr("width", spaceForLabels + chartWidth + spaceForLegend)
     .attr("height", chartHeight);
 
@@ -56,7 +50,7 @@ var bar = chart.selectAll("g")
 
 // Create rectangles of the correct width
 bar.append("rect")
-    //.attr("transform", "translate("+x+", 0)")
+    //.attr("transform", "translate("+ 16 +", 0)")
     .attr("height", barHeight - 1)
     .attr("width", 0)
     .transition()
@@ -64,7 +58,6 @@ bar.append("rect")
     .attr("width", x)
     .attr("fill", function(d,i) { return color(i % data.series.length); })
     .attr("class", "bar")
-
     ;
 
 // Add text label in bar
@@ -119,5 +112,3 @@ legend.append('text')
     .attr('x', legendRectSize + legendSpacing)
     .attr('y', legendRectSize - legendSpacing)
     .text(function (d) { return d.label; });
-
-</script>

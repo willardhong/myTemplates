@@ -4,7 +4,7 @@ from flask import Flask, render_template, jsonify
 import pandas as pd
 import json
 
-data = {
+databar = {
   'labels': [
     'Persona 1', 'Persona 2', 'Persona 3',
     'Persona 4', 'Persona 5', 'Persona 6'
@@ -20,7 +20,7 @@ data = {
     }]
 }
 
-datascatter = [{'x': 12, 'y': 12}, {'x': 11, 'y': 21}, {'x': 12, 'y': 5}];
+datascat = [{'x': 1, 'y': 4}, {'x': 3, 'y': 21}, {'x': 7, 'y': 5}];
 
 app = Flask(__name__)
 
@@ -30,14 +30,15 @@ def hello():
 
 @app.route('/barchart')
 def barchart():
-    return render_template('d3_example1.html',
-                           data=data
-                           )
+    return render_template('d3_example1.html', databar=databar)
 
-@app.route('/scatter')
-def scatter():
-    return render_template('d3_example2.html',
-                  data=datascatter)
+@app.route('/scatter2')
+def scatter2():
+    return render_template('d3_scatter.html', datascat=datascat)
+
+@app.route('/combine')
+def combine():
+    return render_template('d3_combine.html', databar=databar, datascat=datascat)
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)

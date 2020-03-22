@@ -21,17 +21,21 @@ var svg = d3.select("#vis")
 width = width - margin.left - margin.right;
 height = height - margin.top - margin.bottom;
 
-var xscale = d3.scaleLinear()
+var xscale = d3.scale.linear()
                 .domain([0, max])
                 .range([0, width]);
 
-var yscale = d3.scaleLinear()
+var yscale = d3.scale.linear()
                 .domain([0, max])
                 .range([height, 0]);
 
-var xaxis = d3.axisBottom(xscale);
+var xaxis = d3.svg.axis()
+.scale(xscale)
+.orient('bottom');
 
-var yaxis = d3.axisLeft(yscale);
+var yaxis = d3.svg.axis()
+.scale(yscale)
+.orient('left');
 
 svg.append('g')
     .attr('transform', 'translate(0, ' + (height) + ')')
@@ -42,8 +46,8 @@ svg.append('g')
 
 function update() {
     var t = d3.transition()
-        .duration(100)
-        .ease(d3.easeQuadOut);
+        .duration(100);
+        //.ease(d3.easeQuadOut);
 
     //var max = d3.select('#maximum').node().value;
     var max = 5;
@@ -101,6 +105,7 @@ function update() {
     labels
         .exit()
         .remove();
+        
     svg.select('.x.axis')
         .transition(t)
         .call(xaxis);

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scatter</title>
+    <style>
+    .chart {
+    }
+    .main text {
+     font: 10px sans-serif;
+    }
+    .axis line, .axis path {
+     shape-rendering: crispEdges;
+     stroke: black;
+     fill: none;
+    }
+    circle {
+     fill: steelblue;
+    }
+  </style>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+</head>
+
+<body>
+  <script>
+    var datascat = JSON.parse('{{ datascat | tojson | safe }}');
+      //var data = [[5,3], [10,17], [15,4], [2,8]];
+  </script>
+
+  <div id='scatter_vis'>
+
+  </div>
+  <script src="{{ url_for('static', filename='js/scatterchart.js') }}"></script>
+
+</body>
+</html>
